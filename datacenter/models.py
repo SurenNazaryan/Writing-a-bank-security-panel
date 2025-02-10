@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils import timezone
+from django.utils.timezone import localtime
 
 
 SECONDS_IN_HOUR = 3600
@@ -36,8 +36,8 @@ class Visit(models.Model):
 
 
 def get_duration(visit):
-    entered_time = timezone.localtime(visit.entered_at)
-    leaved_time = timezone.localtime(visit.leaved_at)
+    entered_time = localtime(visit.entered_at)
+    leaved_time = localtime(visit.leaved_at)
     duration = int((leaved_time - entered_time).total_seconds())
     return duration
 
