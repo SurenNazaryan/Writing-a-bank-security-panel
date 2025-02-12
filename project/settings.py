@@ -1,21 +1,26 @@
 import os
+from environs import Env
+
+
+env = Env()
+env.read_env()
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'checkpoint.devman.org',
+        'HOST': env.str('HOST'),
         'PORT': '5434',
         'NAME': 'checkpoint',
         'USER': 'guard',
-        'PASSWORD': 'osim5',
+        'PASSWORD': env.str('PASSWORD'),
     }
 }
 
 INSTALLED_APPS = ['datacenter']
 
-SECRET_KEY = 'REPLACE_ME'
+SECRET_KEY = env.str('SECRET_KEY')
 
-DEBUG = True
+DEBUG = env.bool("DEBUG")
 
 ROOT_URLCONF = 'project.urls'
 
@@ -34,9 +39,9 @@ TEMPLATES = [
 
 USE_L10N = True
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = env.str('LANGUAGE_CODE')
 
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = env.str('TIME_ZONE')
 
 USE_TZ = True
 
